@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { User } from "@/types/user";
+import { signIn } from "next-auth/react";
 
 interface Payload {
   email: string;
@@ -13,22 +14,18 @@ interface Payload {
 
 const useLogin = () => {
   const router = useRouter();
-  const { onAuthSuccess } = useAuthStore();
 
   return useMutation({
     mutationFn: async (payload: Payload) => {
-      const { data } = await axiosInstance.post<User>(
-        "/auth/login",
-        payload
-      );
+      const { data } = await axiosInstance.post<User>("/auth/login", payload);
       return data;
     },
-    onSuccess: (data) => {
-      onAuthSuccess({ user: data });
+    onSuccess: async (data) => {
+      await signIn("credentials", { ...data, redirect: false });
       toast.success("sign in success");
       router.replace("/");
     },
-    onError: (error: AxiosError<{ message: string}>) => {
+    onError: (error: AxiosError<{ message: string }>) => {
       toast.error(error.response?.data.message ?? "Something went wrong !");
     },
   });
