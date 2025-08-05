@@ -1,4 +1,4 @@
-import axiosInstance from "@/lib/axios";
+import {axiosInstance} from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";

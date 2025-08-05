@@ -1,4 +1,4 @@
-import axiosInstance from "@/lib/axios";
+import {axiosInstance} from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { Blog } from "@/types/blog";
 import { PageableResponse, PaginationQueries } from "@/types/pagination";

@@ -1,4 +1,4 @@
-import axiosInstance from "@/lib/axios";
+import {axiosInstance} from "@/lib/axios";
 import { Blog } from "@/types/blog";
 import { cache } from "react";
 
